@@ -1,0 +1,22 @@
+{
+  "changelog": {
+    "repo": "mt-inside/gh-actions-test",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "bug": ":bug: Bug Fix",
+      "cosmetic": ":nail_care: Cosmetic",
+      "dependencies": ":arrow_up: Dependencies",
+      "documentation": ":memo: Documentation",
+      "feature": ":rocket: New Feature",
+      "infra": ":construction: Infrastructure",
+      "internal": ":house: Internal",
+      "performance": ":running_woman: Performance",
+      "prototype": ":building_construction: Prototype",
+      "refactor": ":hammer_and_wrench: Refactor",
+      "revert": ":leftwards_arrow_with_hook: Revert",
+      "security": ":closed_lock_with_key: Security",
+      "spag": ":books: SPAG",
+      "testing": ":computer: Testing"
+    }
+  }
+}
