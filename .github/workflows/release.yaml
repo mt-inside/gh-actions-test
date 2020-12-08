@@ -22,7 +22,7 @@ jobs:
 
       - name: Get previous tag
         id: get_previous_tag
-        run: echo "::set-output name=tag::$(git describe --abbrev=0 --tags ${{ steps.get_tag.outputs.tag }}^" # gets the tag before the given ref, which by definition is the most recent tag, which triggered us. --tags includes lightweight tags, because we'll get triggered for them so shouldn't ignore them or we'll get counterintuitive results
+        run: echo "::set-output name=tag::$(git describe --abbrev=0 --tags ${GITHUB_REF#refs/tags/})^" # gets the tag before the given ref, which by definition is the most recent tag, which triggered us. --tags includes lightweight tags, because we'll get triggered for them so shouldn't ignore them or we'll get counterintuitive results
 
       - name: Make changelog
         id: changelog
