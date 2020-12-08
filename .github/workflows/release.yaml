@@ -3,7 +3,6 @@ name: Generate GH Release
 on:
   push:
     tags:
-      - *
 
 jobs:
   make_release:
