@@ -1,0 +1,31 @@
+name: Generate GH Release
+
+on:
+  push:
+    tags:
+      - *
+
+jobs:
+  make_release:
+    name: Make Release
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Get tag
+        id: get_tag
+        run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+
+      - name: Make changelog
+        id: changelog
+        uses: riskledger/generate-changelog@v3
+        env:
+          GITHUB_AUTH: ${{ github.token }} # PR to not use env omg - oh cause it's a fork, yeah, re-write in TS and monads
+
+      - name: Make release
+        uses: mt-inside/make-release@338c470
+        with:
+          name: ${{ steps.get_tag.outputs.tag }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          token: ${{ github.token }}
