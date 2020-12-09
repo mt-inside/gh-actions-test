@@ -36,6 +36,6 @@ jobs:
       - name: Make release
         uses: mt-inside/make-release@338c470
         with:
-          name: ${{ steps.get_current_tag.outputs.tag }}
+          tag: ${{ steps.get_current_tag.outputs.tag }}
           body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ github.token }}
