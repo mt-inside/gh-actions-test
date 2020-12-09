@@ -40,7 +40,7 @@ jobs:
         run: echo "$MSG"
 
       - name: Make release
-        uses: mt-inside/make-release@ed9defe
+        uses: mt-inside/make-release@395f854
         with:
           tag: ${{ steps.get_current_tag.outputs.tag }}
           body: ${{ steps.changelog.outputs.changelog }}
