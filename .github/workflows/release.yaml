@@ -27,7 +27,7 @@ jobs:
 
       - name: Make changelog
         id: changelog
-        uses: mt-inside/generate-changelog@05ab004
+        uses: mt-inside/generate-changelog@c8a4d3c
         with:
           new: ${{ steps.get_current_tag.outputs.tag }}
           old: ${{ steps.get_previous_tag.outputs.tag }}
@@ -37,11 +37,11 @@ jobs:
       - name: trace
         env:
           MSG: ${{ steps.changelog.outputs.changelog }}
-        run: echo "${MSG} no u"
+        run: echo "$MSG"
 
       - name: Make release
-        uses: mt-inside/make-release@c8fbc0f
+        uses: mt-inside/make-release@17c1276
         with:
           tag: ${{ steps.get_current_tag.outputs.tag }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: "No u"
           token: ${{ github.token }}
