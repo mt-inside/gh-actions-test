@@ -35,9 +35,8 @@ jobs:
           GITHUB_AUTH: ${{ github.token }} # Takes via env cause it's a thin wrapper of lerna, which is a bit shit. Re-write in TS and monads
 
       - name: Make release
-        uses: mt-inside/make-release@756d500
+        uses: mt-inside/make-release@dd29597
         with:
           tag: ${{ steps.get_current_tag.outputs.tag }}
-          #body: ${{ steps.changelog.outputs.changelog }}
-          body: "no u"
+          body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ github.token }}
