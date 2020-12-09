@@ -20,6 +20,10 @@ Re-write lerna to
 * show all commits, not just merges, not just PRs (configurable), with "unknown" for unknown/missing labels, "warning" for non-PRs
 * be one big monad string
 
+When this is in a nice shape
+* apply toother repos ofc
+* rename this one to something nice, tart up this readme (include screensots of workflow), spam the socials
+
 ## FIXME
 * being triggered on every push, not just tags - often fails
 * mt-inside/generate-changelog silently returns empty string when there's no PRs in range - have it emit "no changes", or better non-PR commits
