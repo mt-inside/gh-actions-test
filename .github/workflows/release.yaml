@@ -38,5 +38,6 @@ jobs:
         uses: mt-inside/make-release@756d500
         with:
           tag: ${{ steps.get_current_tag.outputs.tag }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          #body: ${{ steps.changelog.outputs.changelog }}
+          body: "no u"
           token: ${{ github.token }}
