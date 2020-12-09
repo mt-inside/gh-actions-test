@@ -34,6 +34,9 @@ jobs:
         env:
           GITHUB_AUTH: ${{ github.token }} # Takes via env cause it's a thin wrapper of lerna, which is a bit shit. Re-write in TS and monads
 
+      - name: trace
+        run: echo ${{ steps.changelog.outputs.changelog }}
+
       - name: Make release
         uses: mt-inside/make-release@338c470
         with:
