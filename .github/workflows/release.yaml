@@ -37,7 +37,7 @@ jobs:
       - name: trace
         env:
           MSG: ${{ steps.changelog.outputs.changelog }}
-        run: echo "$MSG"
+        run: echo "${MSG} no u"
 
       - name: Make release
         uses: mt-inside/make-release@c8fbc0f
