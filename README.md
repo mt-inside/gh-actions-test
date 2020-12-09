@@ -1,6 +1,7 @@
 # gh-actions-test
 
 foo
+one
 
 ## FIXME
 * being triggered on every push
