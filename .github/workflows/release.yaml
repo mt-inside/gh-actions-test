@@ -27,7 +27,7 @@ jobs:
 
       - name: Make changelog
         id: changelog
-        uses: mt-inside/generate-changelog@05ab004
+        uses: mt-inside/generate-changelog@087f8b3
         with:
           new: ${{ steps.get_current_tag.outputs.tag }}
           old: ${{ steps.get_previous_tag.outputs.tag }}
