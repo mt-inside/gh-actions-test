@@ -27,21 +27,16 @@ jobs:
 
       - name: Make changelog
         id: changelog
-        uses: mt-inside/generate-changelog@c8a4d3c
+        uses: mt-inside/generate-changelog@1a10074
         with:
           new: ${{ steps.get_current_tag.outputs.tag }}
           old: ${{ steps.get_previous_tag.outputs.tag }}
         env:
           GITHUB_AUTH: ${{ github.token }} # Takes via env cause it's a thin wrapper of lerna, which is a bit shit. Re-write in TS and monads
 
-      - name: trace
-        env:
-          MSG: ${{ steps.changelog.outputs.changelog }}
-        run: echo "$MSG"
-
       - name: Make release
-        uses: mt-inside/make-release@17c1276
+        uses: mt-inside/make-release@756d500
         with:
           tag: ${{ steps.get_current_tag.outputs.tag }}
-          body: "No u"
+          body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ github.token }}
