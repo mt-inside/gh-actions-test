@@ -27,7 +27,7 @@ jobs:
 
       - name: Make changelog
         id: changelog
-        uses: mt-inside/generate-changelog@8df43ba
+        uses: mt-inside/generate-changelog@05ab004
         with:
           new: ${{ steps.get_current_tag.outputs.tag }}
           old: ${{ steps.get_previous_tag.outputs.tag }}
@@ -40,7 +40,7 @@ jobs:
         run: echo "$MSG"
 
       - name: Make release
-        uses: mt-inside/make-release@338c470
+        uses: mt-inside/make-release@ed9defe
         with:
           tag: ${{ steps.get_current_tag.outputs.tag }}
           body: ${{ steps.changelog.outputs.changelog }}
