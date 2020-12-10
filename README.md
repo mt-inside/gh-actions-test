@@ -62,6 +62,7 @@ Re-write lerna to
 * show all commits, not just merges, not just PRs (configurable), with "unknown" for unknown/missing labels, "warning" for non-PRs
 * be one big monad string
 * not need to take the repo as an arg
+* take config path (like label-prs does)
 
 When this is in a nice shape
 * apply toother repos ofc
