@@ -12,8 +12,10 @@ four
 
 For sanity
 * Only allow merge commits; disable the others
+* Settings -> Options -> Features -> Issues -> make some templates
 
 To make it work like prow...
+* Make `/CODEOWNERS` file
 * Protect branch `main`
 * Require review before merge
 * Require review from code owner
