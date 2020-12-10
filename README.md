@@ -10,10 +10,19 @@ four
 
 ## Repo Setup
 
+For sanity
+* Only allow merge commits; disable the others
+
 To make it work like prow...
 * Protect branch `main`
 * Require review before merge
 * Require review from code owner
+
+## Useful git commands
+git fetch/pull -p # sadly doesn't work with hub sync
+git branch -d foo
+
+TODO merge-only main history
 
 ## TODO
 Lerna is pr-based, ie it will only list PRs!
