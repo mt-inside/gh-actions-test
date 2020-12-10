@@ -18,11 +18,19 @@ To make it work like prow...
 * Require review before merge
 * Require review from code owner
 
-## Useful git commands
+## Workflow
+
+git tag -a v1.2.3 -m "v1.2.3"
+git push --follow-tags
+
 git fetch/pull -p # sadly doesn't work with hub sync
 git branch -d foo
 
-TODO merge-only main history
+git log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --
+# show just this branch, not the branches off it. If this is master, this'll just show the merge commits.
+git log --first-parent --abbrev-commit --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --
+# kinda opposite of the above, show the "real" commits on this branch (if any), and from branches that feed into it, but not the merge commits. Ie show a
+git log --no-merges --abbrev-commit --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --
 
 ## TODO
 Lerna is pr-based, ie it will only list PRs!
