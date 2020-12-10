@@ -1,0 +1,6 @@
+# https://github.com/TimonVS/pr-labeler-action
+# Keys should match labels in /lerna.json
+# The config in this repo matches the default GH labels, which aren't that expressive. You probably want to add labels in GH and then in here and lerna.json
+documentation: ["documentation/*", "docs/*", "doc/*"]
+bug: ["bug/*", "fix/*"]
+enhancement: ["feature/*", "feat/*", "enhancement/*"]
