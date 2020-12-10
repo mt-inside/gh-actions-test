@@ -11,7 +11,9 @@ four
 ## Repo Setup
 
 For sanity
-* Only allow merge commits; disable the others
+* Settings -> Options -> Merge Button ->
+  * Only allow merge commits; disable the others
+  * Automatically delete head branches
 * Settings -> Options -> Features -> Issues -> make some templates
 
 To make it work like prow...
@@ -22,17 +24,30 @@ To make it work like prow...
 
 ## Workflow
 
-git tag -a v1.2.3 -m "v1.2.3"
-git push --follow-tags
-
+### Do work
+Pick an Issue from Issues
+Add to project board, drag to In Progress (TODO automation)
+git checkout -b foo
+git commit
+git push -u origin foo
+Raise PR (can't use `hub pull-request` becuase it's hardcoded to master and crashes if you've called it main)
+Merge PR, hit "delete branch" if it's not automatic
 git fetch/pull -p # sadly doesn't work with hub sync
 git branch -d foo
 
+### See the work
 git log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --
 # show just this branch, not the branches off it. If this is master, this'll just show the merge commits.
 git log --first-parent --abbrev-commit --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --
 # kinda opposite of the above, show the "real" commits on this branch (if any), and from branches that feed into it, but not the merge commits. Ie show a
 git log --no-merges --abbrev-commit --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --
+
+### Do a release
+git tag -a v1.2.3 -m "v1.2.3"
+git push --follow-tags
+GH Actions go brrr
+
+
 
 ## TODO
 Lerna is pr-based, ie it will only list PRs!
