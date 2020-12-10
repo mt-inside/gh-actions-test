@@ -1,11 +1,19 @@
 # gh-actions-test
 
+## Scratch to generate noise
 foo
 one
 two
 three
 just in case
 four
+
+## Repo Setup
+
+To make it work like prow...
+* Protect branch `main`
+* Require review before merge
+* Require review from code owner
 
 ## TODO
 Lerna is pr-based, ie it will only list PRs!
