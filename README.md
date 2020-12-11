@@ -18,10 +18,16 @@ For sanity
 * Settings -> Options -> Features -> Issues -> make some templates
 
 To make it work like prow...
-* Make `/CODEOWNERS` file
+* Given `/CODEOWNERS` file
 * Protect branch `main`
 * Require review before merge
 * Require review from code owner
+
+Install hooks
+```bash
+cd .git/hooks
+ln -s ../../hooks/*
+```
 
 ## Workflow
 

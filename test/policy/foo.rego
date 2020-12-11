@@ -1,6 +1,6 @@
 package main
 
-rude := "bye"
+rude := "byeee"
 
 deny[msg] {
   input.foo.bar.baz == rude

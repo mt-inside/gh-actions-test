@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# Not the best script, and very specific to this repo
+# Assume https://pre-commit.com addresses all this, but this was interesting to write
+#
+# $PWD is the root of WORKTREE
+
+exec 1>&2
+TMP="$(mktemp -d)" # TODO cleanup
+
+echo $TMP
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+        against=HEAD
+else
+        # Initial commit: diff against an empty tree object
+        against=$(git hash-object -t tree /dev/null)
+fi
+
+
+# Get relevant source files to test; ie added, copied, modified, renamed
+SRCS=$(git diff --cached --name-only --diff-filter=ACMR $against "*.yaml")
+[ -z "$SRCS" ] && exit 0
+
+mkdir -p "$TMP/src"
+for FILE in $SRCS
+do
+    # Dump staging version of the file (as there may be even more modifications in the working tree; the staging version is what will form the commit).
+    git show ":$FILE" > "$TMP/$FILE"
+
+    # The above seems to work, but the internet recommends the more complex...
+    #ID=$(git diff-index --cached $against $FILE | cut -d " " -f 4)
+    #git cat-file blob $ID > "$TMP/$FILE"
+done
+
+
+# We also need up-to-date tests, as this commit might change sources and policy together
+# But we want all test files, even those unmodified
+TESTS=$(git ls-files --cached test/policy)
+
+mkdir -p "$TMP/test/policy"
+for FILE in $TESTS
+do
+    git show ":$FILE" > "$TMP/$FILE"
+done
+
+
+conftest test --policy="$TMP/test" "$TMP/src"
