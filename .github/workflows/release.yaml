@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v1 # implicity relies on /Dockerfile
         with:
           registry: docker.pkg.github.com # github packages isn't the most widely used registry, but this avoids docker-hub credentials management
-          repository: mtinside/gh-actions-test/example # docker run docker.pkg.github.com/mtinside/gh-actions-test/example:vX.X.X
+          repository: ${{ github.repository }}/example # docker run docker.pkg.github.com/mt-inside/gh-actions-test/example:vX.X.X
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           tag_with_ref: true
