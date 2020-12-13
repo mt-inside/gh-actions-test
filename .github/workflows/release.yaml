@@ -18,9 +18,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Get current tag
-        id: get_current_tag
-        run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+      - name: Build
+        run: zip --junk-paths example src/*yaml README.md
 
       - name: Get previous tag
         id: get_previous_tag
@@ -36,8 +35,23 @@ jobs:
           GITHUB_AUTH: ${{ github.token }} # Takes via env cause it's a thin wrapper of lerna, which is a bit shit. Re-write in TS and monads
 
       - name: Make release
-        uses: mt-inside/make-release@dd29597
+        id: make_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          tag: ${{ steps.get_current_tag.outputs.tag }}
+          tag_name: ${{ github.ref }} # Guarenteed to be a tag cause by definion we're on one
+          release_name: Release ${{ github.ref }}
           body: ${{ steps.changelog.outputs.changelog }}
-          token: ${{ github.token }}
+          prerelease: false
+          draft: true
+
+      - name: Uploade Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.make_release.outputs.upload_url }}
+          asset_path: ./example.zip
+          asset_name: example.zip
+          asset_content_type: application/zip
