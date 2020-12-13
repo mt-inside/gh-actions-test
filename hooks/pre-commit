@@ -20,7 +20,7 @@ fi
 
 
 # Get relevant source files to test; ie added, copied, modified, renamed
-SRCS=$(git diff --cached --name-only --diff-filter=ACMR $against "*.yaml")
+SRCS=$(git diff --cached --name-only --diff-filter=ACMR $against "/src/*.yaml")
 [ -z "$SRCS" ] && exit 0
 
 mkdir -p "$TMP/src"
