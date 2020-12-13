@@ -29,7 +29,7 @@ jobs:
         id: changelog
         uses: mt-inside/generate-changelog@1a10074
         with:
-          new: ${{ steps.get_current_tag.outputs.tag }}
+          new: ${{ github.ref }}
           old: ${{ steps.get_previous_tag.outputs.tag }}
         env:
           GITHUB_AUTH: ${{ github.token }} # Takes via env cause it's a thin wrapper of lerna, which is a bit shit. Re-write in TS and monads
