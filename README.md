@@ -1,6 +1,7 @@
 # gh-actions-test
 
-![Build](https://github.com/mt-inside/mt165.co.uk/workflows/Build%20and%20Publish/badge.svg)
+![Policy](https://github.com/mt-inside/gh-actions-test/workflows/policy/badge.svg)
+![Release](https://github.com/mt-inside/gh-actions-test/workflows/release/badge.svg)
 ![GitHub Issues](https://img.shields.io/github/issues-raw/mt-inside/gh-actions-test)
 
 ## Repo Setup
