@@ -1,7 +1,7 @@
 # gh-actions-test
 
 ![Build](https://github.com/mt-inside/mt165.co.uk/workflows/Build%20and%20Publish/badge.svg)
-[![Issues](https://img.shields.io/github/issues/Airblader/i3.svg)](https://github.com/Airblader/i3/issues)
+![GitHub Issues](https://img.shields.io/github/issues-raw/mt-inside/gh-actions-test)
 
 ## Repo Setup
 
