@@ -1,5 +1,4 @@
-name: Generate GH Release
-id: release
+name: release
 
 # fixme: running on non-tag pushes, getting confused
 on:

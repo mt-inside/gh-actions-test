@@ -1,5 +1,4 @@
-name: Check source against policy
-id: policy
+name: policy
 
 on: [push]
 
