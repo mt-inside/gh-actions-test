@@ -1,0 +1,66 @@
+name: build
+
+# fixme: running on non-tag pushes, getting confused
+on:
+  push:
+    branches:
+      - '*'
+
+# Note the commits operated on are based from GITHUB_REF, but I think we could just use `git describe` becuase I'm sure the repo is checked out to that point. eg
+#   git for-each-ref --count=1 --sort='-*authordate' --format='%(*refname:short)' 'refs/tags'
+#   git describe --abbrev=0 --tags $(git describe --tags --abbrev=0)^
+
+jobs:
+  make_release:
+    name: Build and Push
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Build
+        run: zip --junk-paths example src/*yaml README.md
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: mtinside
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+            #TODO: tf this and the repo
+
+      # - name: Config AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: eu-west-1
+      # - name: Login to ECR
+      #   id: login-ecr
+      #   uses: aws-actions/amazon-ecr-login@v1
+
+    # - name: Setup gcloud / gsutil
+    #   uses: google-github-actions/setup-gcloud@v0.2.0
+    #   with:
+    #     project_id: ${{ secrets.GCP_PROJECT }}
+    #     service_account_key: ${{ secrets.GCS_SA_KEY }}
+    #     export_default_credentials: true
+
+      - name: Make and push Docker image
+        uses: docker/build-push-action@v2 # uses /Dockerfile unless overridden
+        with:
+          # registry: docker.pkg.github.com # github packages isn't the most widely used registry, but this avoids docker-hub credentials management
+          # repository: ${{ github.repository }}/example # docker run docker.pkg.github.com/mt-inside/gh-actions-test/example:vX.X.X
+          # tag_with_ref: true
+            #username: ${{ github.actor }}
+            #password: ${{ secrets.GITHUB_TOKEN }}
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/example:latest
+            docker.io/mtinside/gh-actions-test:latest
